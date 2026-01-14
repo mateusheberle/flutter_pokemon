@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'core/usecase/app_strings.dart';
+import 'features/pokemon/presentation/pages/generations_page.dart';
+import 'features/pokemon/presentation/pages/home_page.dart';
+import 'features/pokemon/presentation/widgets/app_style.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: AppStrings.appTitle,
+      theme: AppStyle.theme,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => const GenerationsPage(),
+        '/homePage': (BuildContext context) =>
+            const HomePage(title: AppStrings.appTitle, generation: 1),
+      },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
