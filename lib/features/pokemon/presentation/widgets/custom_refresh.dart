@@ -1,34 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../data/repositories/pokemon_repository_impl.dart';
-import '../state/pokemon_controller.dart';
-
 class CustomRefresh extends StatelessWidget {
-  const CustomRefresh({
-    super.key,
-    required this.homePageController,
-    required this.repository,
-  });
+  const CustomRefresh({super.key, required this.isLoading});
 
-  final HomePageController homePageController;
-  final HomePageRepository repository;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    if (!isLoading) {
+      return const SizedBox.shrink();
+    }
+
+    return const Positioned(
       child: Center(
-        child: ValueListenableBuilder(
-          valueListenable: homePageController.isRefreshing,
-          builder: (context, value, child) {
-            return homePageController.isRefreshing.value
-                ? const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.greenAccent,
-                    ),
-                    strokeWidth: 2,
-                  )
-                : const SizedBox();
-          },
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
+          strokeWidth: 2,
         ),
       ),
     );

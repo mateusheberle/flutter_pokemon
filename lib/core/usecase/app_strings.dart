@@ -8,7 +8,8 @@ class AppStrings {
   // Generation page
   static const String generationsTitle = 'Gerações de Pokémon';
   static const String generation = 'Geração';
-  static String generationSelected(int number) => 'Geração $number selecionada';
+  static String generationSelected(int number) =>
+      ' $numberª Geração selecionada';
 
   // Pokemon detail tabs
   static const String infoTab = 'Info';

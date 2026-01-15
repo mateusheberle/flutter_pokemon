@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
-
-import '../../data/models/pokemon_model.dart';
+import '../../domain/entities/pokemon_entity.dart';
 import '../pages/pokemon_detail_page.dart';
 import '../state/arguments.dart';
-import '../state/pokemon_controller.dart';
 import 'imagem_item.dart';
 
 class CarouselCard extends StatelessWidget {
   const CarouselCard({
     super.key,
     required this.index,
-    required this.name,
     required this.pokemon,
     required this.color,
-    required this.homePageController,
     required this.indexSelectedContainer,
     required this.sizeSelectedContainer,
     required this.itemFocusNode,
   });
 
   final int index;
-  final String name;
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   final Color color;
-  final HomePageController homePageController;
   final ValueNotifier<int> indexSelectedContainer;
   final ValueNotifier<double> sizeSelectedContainer;
   final ValueNotifier<FocusNode> itemFocusNode;
@@ -52,13 +46,9 @@ class CarouselCard extends StatelessWidget {
                 transitionDuration: const Duration(milliseconds: 1000),
                 reverseTransitionDuration: const Duration(milliseconds: 500),
                 pageBuilder: (context, animation, secondaryAnimation) =>
-                    PokemonDetail(pokemon: pokemon),
+                    PokemonDetail(pokemonId: pokemon.id),
                 settings: RouteSettings(
-                  arguments: Arguments(
-                    tag: tag,
-                    homePageController: homePageController,
-                    pokemon: pokemon,
-                  ),
+                  arguments: Arguments(tag: tag, pokemon: pokemon),
                 ),
               ),
             );

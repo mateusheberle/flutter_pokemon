@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokemon/features/pokemon/domain/entities/pokemon_entity.dart';
 
 import '../../../../core/usecase/color_utils.dart';
 import '../../../../core/usecase/string_utils.dart';
-import '../../data/models/pokemon_model.dart';
-import '../state/pokemon_controller.dart';
 import 'carousel_card.dart';
 
 /// Custom carousel slider widget for displaying Pokemon cards
@@ -15,15 +14,13 @@ class CustomCarouselSlider extends StatefulWidget {
     required this.showType,
     required this.initialPage,
     required this.pokemons,
-    required this.homePageController,
   });
 
   final String name;
   final String type;
   final bool showType;
   final int initialPage;
-  final List<Pokemon> pokemons;
-  final HomePageController homePageController;
+  final List<PokemonEntity> pokemons;
 
   @override
   State<CustomCarouselSlider> createState() => _CustomCarouselSliderState();
@@ -93,10 +90,8 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
 
                   return CarouselCard(
                     index: index,
-                    name: widget.name,
                     pokemon: item,
                     color: cardColor,
-                    homePageController: widget.homePageController,
                     indexSelectedContainer: indexSelectedContainer,
                     sizeSelectedContainer: sizeSelectedContainer,
                     itemFocusNode: itemFocusNode,

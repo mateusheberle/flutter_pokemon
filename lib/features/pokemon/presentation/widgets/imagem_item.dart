@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokemon/features/pokemon/domain/entities/pokemon_entity.dart';
 
 import '../../../../core/usecase/string_utils.dart';
-import '../../data/models/pokemon_model.dart';
 import 'imagem_network.dart';
 
 /// Widget to display a Pokemon image with its name
@@ -13,7 +13,7 @@ class ImageItem extends StatelessWidget {
     required this.color,
   });
 
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
   final String tag;
   final Color color;
 
@@ -26,7 +26,7 @@ class ImageItem extends StatelessWidget {
         child: Stack(
           children: [
             ImageNetwork(
-              url: pokemon.sprites?[0] ?? '',
+              url: pokemon.imageUrl,
               fit: BoxFit.contain,
               height: 350,
               width: null,

@@ -1,37 +1,19 @@
-import '../../data/models/pokemon_model.dart';
-import 'pokemon_controller.dart';
+import '../../domain/entities/pokemon_entity.dart';
 
 /// Arguments class for passing data between routes
 ///
 /// This class encapsulates navigation arguments used when
 /// transitioning to Pokemon detail pages.
 class Arguments {
-  /// Creates an Arguments instance
-  const Arguments({
-    required this.tag,
-    required this.pokemon,
-    required this.homePageController,
-  });
+  const Arguments({required this.tag, required this.pokemon});
 
   /// Unique tag for hero animations
   final String tag;
 
   /// Pokemon data to display
-  final Pokemon pokemon;
+  final PokemonEntity pokemon;
 
-  /// Home page controller reference
-  final HomePageController homePageController;
-
-  /// Creates a copy of this Arguments with the given fields replaced
-  Arguments copyWith({
-    String? tag,
-    Pokemon? pokemon,
-    HomePageController? homePageController,
-  }) {
-    return Arguments(
-      tag: tag ?? this.tag,
-      pokemon: pokemon ?? this.pokemon,
-      homePageController: homePageController ?? this.homePageController,
-    );
+  Arguments copyWith({String? tag, PokemonEntity? pokemon}) {
+    return Arguments(tag: tag ?? this.tag, pokemon: pokemon ?? this.pokemon);
   }
 }
