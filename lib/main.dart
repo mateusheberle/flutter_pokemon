@@ -28,11 +28,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Pokémon',
         theme: ThemeData.dark(),
         home: const HomePage(),
-
         onGenerateRoute: (settings) {
           if (settings.name == '/pokemon-detail') {
             final int pokemonId = settings.arguments as int;
-
             return MaterialPageRoute(
               builder: (_) => ChangeNotifierProvider(
                 create: (_) => sl<PokemonDetailController>(),
@@ -42,6 +40,7 @@ class MyApp extends StatelessWidget {
           }
           return null;
         },
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

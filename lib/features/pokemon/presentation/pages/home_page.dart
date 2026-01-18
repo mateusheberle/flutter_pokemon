@@ -23,12 +23,10 @@ class HomePage extends StatelessWidget {
       ),
       body: Consumer<PokemonController>(
         builder: (context, controller, _) {
-          // 🔄 Loading inicial
           if (controller.isLoading && controller.pokemons.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // ❌ Erro
           if (controller.error != null && controller.pokemons.isEmpty) {
             return Center(
               child: Text(

@@ -19,7 +19,6 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
 
     final results = response.data['results'] as List;
 
-    // busca detalhes em paralelo (performance!)
     return Future.wait(
       results.map((e) async {
         final detail = await dio.get(e['url']);
