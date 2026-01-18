@@ -75,7 +75,7 @@ O projeto segue os princípios de **Clean Architecture**, com separação clara 
 
 * **Pages**: telas da aplicação
 * **Widgets**: componentes reutilizáveis
-* **State**: gerenciamento de estado com `ChangeNotifier`
+* **State**: gerenciamento de estado com `ChangeNotifier + Provider`
 
 ---
 
@@ -141,8 +141,6 @@ flutter run
 
 ## 🚀 Possíveis Melhorias
 
-* Implementação de cache em memória
-* Adição de testes unitários
 * Tratamento offline
 * Animações e melhorias visuais
 * Internacionalização (i18n)

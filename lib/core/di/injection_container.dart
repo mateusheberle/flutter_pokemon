@@ -7,6 +7,8 @@ import '../../features/pokemon/domain/repositories/pokemon_repository.dart';
 
 import '../../features/pokemon/data/datasources/pokemon_remote_datasource.dart';
 import '../../features/pokemon/data/datasources/pokemon_remote_datasource_impl.dart';
+import '../../features/pokemon/data/datasources/pokemon_local_datasource.dart';
+import '../../features/pokemon/data/datasources/pokemon_local_datasource_impl.dart';
 import '../../features/pokemon/data/repositories/pokemon_repository_impl.dart';
 
 import '../../features/pokemon/presentation/state/pokemon_controller.dart';
@@ -18,21 +20,30 @@ Future<void> setupInjection() async {
   // External
   sl.registerLazySingleton<Dio>(() {
     return Dio(
-      BaseOptions(
-        baseUrl: 'https://pokeapi.co/api/v2/',
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-      ),
-    );
+        BaseOptions(
+          baseUrl: 'https://pokeapi.co/api/v2/',
+          connectTimeout: const Duration(seconds: 10),
+          receiveTimeout: const Duration(seconds: 10),
+          // Aumenta o pool de conexões para melhor paralelismo
+          maxRedirects: 5,
+        ),
+      )
+      ..interceptors.add(
+        LogInterceptor(requestBody: false, responseBody: false),
+      );
   });
 
   // Data
+  sl.registerLazySingleton<PokemonLocalDataSource>(
+    () => PokemonLocalDataSourceImpl(),
+  );
+
   sl.registerLazySingleton<PokemonRemoteDataSource>(
     () => PokemonRemoteDataSourceImpl(sl()),
   );
 
   sl.registerLazySingleton<PokemonRepository>(
-    () => PokemonRepositoryImpl(sl()),
+    () => PokemonRepositoryImpl(sl(), sl()),
   );
 
   // Domain
